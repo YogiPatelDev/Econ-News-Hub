@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Economics News Hub</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --card-color: #f0f0f0;
+        }
+
+        body.dark-mode {
+            --bg-color: #121212;
+            --text-color: #f1f1f1;
+            --card-color: #1e1e1e;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        header {
+            padding: 1rem;
+            text-align: center;
+            background-color: var(--card-color);
+            position: relative;
+        }
+
+        .toggle-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: transparent;
+            border: 2px solid var(--text-color);
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            color: var(--text-color);
+            border-radius: 50px;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-btn:hover {
+            background-color: var(--card-color);
+        }
+
+        .news-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        .news-card {
+            background-color: var(--card-color);
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .news-card h3 {
+            margin: 0 0 0.5rem 0;
+        }
+
+        .news-card p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Economics News Hub</h1>
+        <!-- Dark/Light Mode Toggle Button -->
+        <button class="toggle-btn" onclick="toggleDarkMode()" id="modeToggle">🌞</button>
+    </header>
+
+    <main class="news-container" id="news">
+        <p>Loading latest economics news...</p>
+    </main>
+
+    <script>
+        // Toggle dark/light mode with animated icon
+        function toggleDarkMode() {
+            const body = document.body;
+            const toggleBtn = document.getElementById('modeToggle');
+            body.classList.toggle('dark-mode');
+            toggleBtn.textContent = body.classList.contains('dark-mode') ? '🌙' : '🌞';
+        }
+
+        // Manually adding economic news articles
+        function fetchNews() {
+            const container = document.getElementById('news');
+            container.innerHTML = '';
+
+            const articles = [
+                {
+                    title: "U.S. and China Reach Preliminary Trade Deal",
+                    description: "U.S. Treasury Secretary Scott Bessent and Trade Representative Jamieson Greer announced a deal with China aimed at reducing the U.S. trade deficit following two days of negotiations in Geneva. Details are expected to be released on Monday.",
+                    url: "https://www.reuters.com/world/china/us-china-talks-defuse-trade-row-resume-geneva-2025-05-11/"
+                },
+                {
+                    title: "UK Interest Rate Cut Unlikely to Sway Public Opinion",
+                    description: "The Bank of England's recent interest rate cut offers hope for the struggling economy but is unlikely to significantly shift public perception of the government, especially after disappointing local election results.",
+                    url: "https://www.theguardian.com/business/2025/may/11/uk-interest-rate-voters-inflation-wage-demands"
+                },
+                {
+                    title: "Middle-Class Spending Declines Impact Luxury Market",
+                    description: "The global personal luxury goods market faces a downturn as middle-class consumers reduce their 'aspirational' luxury spending due to rising prices and inflation, threatening a years-long boom in the high-end market.",
+                    url: "https://www.businessinsider.com/middle-class-economy-wealth-luxury-shopping-consumers-spending-retail-2025-5"
+                },
+                {
+                    title: "Fed Holds Rates Steady Amid Inflation Concerns",
+                    description: "The Federal Reserve left interest rates unchanged, warning of rising risks to the economy, including higher unemployment and inflation, following President Trump's announcement of widespread import tariffs.",
+                    url: "https://www.usnews.com/news/economy/articles/2025-05-07/fed-holds-rates-steady-warns-of-higher-unemployment-and-inflation"
+                },
+                {
+                    title: "Europe Threatens Sanctions Over Nord Stream 2",
+                    description: "European leaders have threatened new sanctions against Russia, including a permanent block on the Nord Stream 2 gas pipeline, if Moscow fails to agree to a 30-day cease-fire proposed by President Trump.",
+                    url: "https://www.wsj.com/world/europe/europe-threatens-nord-stream-2-sanctions-to-pressure-russia-to-cease-fire-bbce4d41"
+                }
+            ];
+
+            articles.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'news-card';
+                card.innerHTML = `
+                    <h3>${item.title}</h3>
+                    <p>${item.description}</p>
+                    <a href="${item.url}" target="_blank">Read more</a>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        fetchNews();
+    </script>
+</body>
+</html>
